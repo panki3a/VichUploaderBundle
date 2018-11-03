@@ -4,6 +4,7 @@ namespace Vich\UploaderBundle\Storage;
 
 use League\Flysystem\FileNotFoundException;
 use League\Flysystem\FilesystemInterface;
+use League\Flysystem\AdapterInterface;
 use League\Flysystem\MountManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
@@ -37,6 +38,7 @@ class FlysystemStorage extends AbstractStorage
         $stream = fopen($file->getRealPath(), 'r');
         $fs->putStream($path, $stream, [
             'mimetype' => $file->getMimeType(),
+            'visibility' => AdapterInterface::VISIBILITY_PUBLIC
         ]);
     }
 
